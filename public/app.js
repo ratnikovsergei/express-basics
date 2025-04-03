@@ -11,6 +11,8 @@ document.addEventListener('click', (e) => {
     const id = e.target.dataset.id;
     const title = prompt('Введите новое название');
 
+    if (!title) return;
+
     update({ id, title });
   }
 });
