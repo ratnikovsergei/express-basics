@@ -9,11 +9,13 @@ document.addEventListener('click', (e) => {
 
   if (e.target.dataset.type === 'edit') {
     const id = e.target.dataset.id;
-    const title = prompt('Введите новое название');
+    const newTitle = prompt('Введите новое название');
 
-    if (!title) return;
-
-    update({ id, title });
+    if (newTitle) {
+      update({ id, title: newTitle }).then(() => {
+        e.target.closest('li').querySelector('span').innerText = newTitle;
+      });
+    }
   }
 });
 
@@ -29,6 +31,4 @@ async function update(note) {
     },
     body: JSON.stringify(note),
   });
-
-  if (response.ok) window.location.reload();
 }
